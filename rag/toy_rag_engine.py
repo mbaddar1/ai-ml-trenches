@@ -47,7 +47,7 @@ def add_chunk_to_database(chunk):
   VECTOR_DB.append((chunk, embedding))
 if __name__ == "__main__":
     # ( 1 ) Load & Chunk
-    with open('cat-facts.txt', 'r') as file:
+    with open('data/cat-facts.txt', 'r') as file:
         dataset = file.readlines() # each line is the chunk
         logger.info(f'Loaded {len(dataset)} entries')
         # Each element in the VECTOR_DB will be a tuple (chunk, embedding)
@@ -80,7 +80,6 @@ if __name__ == "__main__":
         stream=True,
     )
     response_chunks = []
-    response = ' '.join(response_chunks)
     for chunk in stream:
         response_chunks.append(chunk['message']['content'])
     logger.info(f"Response = {''.join(response_chunks)}")
